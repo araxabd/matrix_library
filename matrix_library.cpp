@@ -24,6 +24,18 @@ int** mtrx_create(int w, int h)
 	return matrix;
 }
 
+void mtrx_input(int** matrix, int w, int h)
+{
+	for(int i=0;i < h;i++)
+	{
+		for(int j=0;j<w;j++)
+		{
+			cout << "row " << i+1 << "column " << j+1 << " : ";
+			cin >> matrix[i][j];
+		}
+	}
+}
+
 void mtrx_add(int** first, int** second, int w, int h)
 {
 	for(int i=0;i<h;i++)
