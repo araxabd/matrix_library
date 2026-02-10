@@ -1,14 +1,25 @@
 #include "matrix_library.h"
 #include <stdlib.h>
+#include <iostream>
 
+using namespace std;
 
 int** mtrx_create(int w, int h)
 {
 	int** matrix = (int**)malloc(sizeof(int*)*h);
-	//TODO: memory allocation check
+	if(matrix == NULL)
+	{
+		cout << "Memory allocation error" << endl;
+		return NULL;
+	}
 	for(int i=0;i<h;i++)
 	{
 		matrix[i]  = (int*)malloc(sizeof(int)*w);
+		if(matrix[i] == NULL)
+		{
+			cout << "Memory allocation error" << endl;
+			return NULL;
+		}
 	}
 	return matrix;
 }
