@@ -36,13 +36,15 @@ void mtrx_input(int** matrix, int w, int h)
 	}
 }
 
-void mtrx_add(int** first, int** second, int w, int h)
+int** mtrx_add(int** first, int** second, int w, int h)
 {
+	int** answer = mtrx_create(w, h);
 	for(int i=0;i<h;i++)
 	{
 		for(int j=0;j<w;j++)
 		{
-			first[i][j] += second[i][j];
+			answer[i][j] = first[i][j] + second[i][j];
 		}
 	}
+	return answer;
 }

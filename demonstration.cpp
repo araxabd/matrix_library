@@ -28,7 +28,7 @@ int main()
 	mtrx_input(sample_1, w, h);
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(sample_2, w, h);
-	mtrx_add(sample_1, sample_2, w, h);
-	text_display_matrix(sample_1, w, h);
+	int** answer = mtrx_add(sample_1, sample_2, w, h);
+	text_display_matrix(answer, w, h);
 	return 0;
 }
