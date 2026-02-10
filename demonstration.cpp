@@ -14,21 +14,35 @@ void text_display_matrix(int** matrix, int w, int h)
 
 int main()
 {
-	int w = 0;
-	int h = 0;
+	int fw = 0;
+	int fh = 0;
 	cout << "Enter the number of rows : ";
-	cin >> h;
+	cin >> fh;
 	cout << "Enter the number of columns : ";
-	cin >> w;
+	cin >> fw;
 
-	int** sample_1 = mtrx_create(w, h);
-	int** sample_2 = mtrx_create(w, h);
+	int** sample_1 = mtrx_create(fw, fh);
 
 	cout << "---Enter first matrix values---" << endl;
-	mtrx_input(sample_1, w, h);
+	mtrx_input(sample_1, fw, fh);
+
+
+	int sw = 0;
+	int sh = 0;
+	cout << "Enter the number of rows : ";
+	cin >> sh;
+	cout << "Enter the number of columns : ";
+	cin >> sw;
+
+	int** sample_2 = mtrx_create(sw, sh);
+
 	cout << "---Enter second matrix values---" << endl;
-	mtrx_input(sample_2, w, h);
-	int** answer = mtrx_add(sample_1, sample_2, w, h);
-	text_display_matrix(answer, w, h);
+	mtrx_input(sample_2, sw, sh);
+
+
+
+
+	int** answer = mtrx_multiply(sample_1, fw, fh, sample_2, sw, sh);
+	text_display_matrix(answer, sw, fh);
 	return 0;
 }

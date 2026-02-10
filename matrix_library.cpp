@@ -48,3 +48,24 @@ int** mtrx_add(int** first, int** second, int w, int h)
 	}
 	return answer;
 }
+
+int** mtrx_multiply(int** first, int fw, int fh, int** second, int sw, int sh)
+{
+	if(fw != sh) {
+		cout << "CAN NOT BE MULTIPLIED (BAD DIMENSIONS)" << endl;
+		return NULL;
+	}
+	int** answer = mtrx_create(sw, fh);
+	int acc = 0;
+	for(int i=0;i < fh;i++) {
+		for(int j=0;j < sw;j++) {
+			for(int e=0;e < fw;e++) {
+				acc += first[i][e]*second[e][j];
+			}
+			answer[i][j] = acc;
+			acc = 0;
+		}
+	}
+	return answer;
+	
+}
