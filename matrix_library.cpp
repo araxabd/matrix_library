@@ -24,6 +24,15 @@ int** mtrx_create(int w, int h)
 	return matrix;
 }
 
+void mtrx_txt_display(int** matrix, int w, int h)
+{
+	for(int i=0;i<h;i++) {
+		for(int j=0;j<w;j++)
+			cout << matrix[i][j] << ' ';
+		cout << endl;
+	}
+}
+
 void mtrx_input(int** matrix, int w, int h)
 {
 	for(int i=0;i < h;i++)

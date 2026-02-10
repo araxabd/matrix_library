@@ -4,6 +4,7 @@
 
 int** mtrx_create(int, int); // args: width, height
 
+void mtrx_txt_display(int**, int, int); // args: matrix, width, height
 
 void mtrx_input(int**, int, int); // args: matrix, width, height
 

@@ -3,14 +3,7 @@
 
 using namespace std;
 
-void text_display_matrix(int** matrix, int w, int h)
-{
-	for(int i=0;i<h;i++) {
-		for(int j=0;j<w;j++)
-			cout << matrix[i][j] << ' ';
-		cout << endl;
-	}
-}
+
 
 int main()
 {
@@ -43,6 +36,6 @@ int main()
 
 
 	int** answer = mtrx_multiply(sample_1, fw, fh, sample_2, sw, sh);
-	text_display_matrix(answer, sw, fh);
+	mtrx_txt_display(answer, sw, fh);
 	return 0;
 }
