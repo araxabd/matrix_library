@@ -215,3 +215,87 @@ double** mtrx_inverse(double** matrix, int n)
 	return answer;
 }
 
+
+
+double* vctr_create(int n)
+{
+	double* vector = (double*)malloc(sizeof(double)*n);
+	if(vector==NULL)
+		cout << "MEMORY ALLOCATION FAILED!" << endl;
+	return vector;
+}
+
+void vctr_free(double* vector)
+{
+	free(vector);
+}
+
+double* vctr_add(double* first, double* second, int n)
+{
+	double* answer = vctr_create(n);
+	for(int i=0;i < n;i++)
+	{
+		answer[i] = first[i] + second[i];
+	}
+	return answer;
+}
+double* vctr_sub(double* first, double* second, int n)
+{
+	double* answer = vctr_create(n);
+	for(int i=0;i < n;i++)
+	{
+		answer[i] = first[i] - second[i];
+	}
+	return answer;
+}
+
+double* vctr_multiply_scalar(double* vector, int n, double scalar)
+{
+	double* answer = vctr_create(n);
+	for(int i=0;i<n;i++)
+	{
+		answer[i] = vector[i] * scalar;
+	}
+	return answer;
+}
+
+double vctr_dotp(double* first, double* second, int n)
+{
+	double answer = 0;
+	for(int i=0;i<n;i++)
+	{
+		answer += first[i]*second[i];
+	}
+	return answer;
+}
+
+double* vctr_crossp(double* first, double* second, int n)
+{
+	if(n != 3) {
+		cout << "VECTORS SHOULD HAVE 3 DIMENSIONS!" << endl;
+		return NULL;
+	}
+	double* answer = vctr_create(n);
+	double** matrix = mtrx_create(2,2);
+	int index, sign=1;
+	for(int i=0;i<n;i++)
+	{
+		index = 0;
+		for(int j=0;j<n;j++)
+		{
+			if( i == j )
+				continue;
+			matrix[0][index] = first[j];
+			matrix[1][index] = second[j];
+			index++;
+		}
+		answer[i] = sign * mtrx_determinant(matrix, 2);
+		sign *= -1;
+	}
+	return answer;
+}
+
+double vctr_size(double* vector, int n)
+{
+	//TODO
+}

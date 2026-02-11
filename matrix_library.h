@@ -23,4 +23,22 @@ double mtrx_determinant(double**, int); // args: matrix, width&height
 double** mtrx_cofactor(double**, int); // args: matrix, width&height
 double** mtrx_inverse(double**, int); // args: matrix, width&height
 
+
+
+
+
+double* vctr_create(int); // args: number of dimensions
+void vctr_free(double*); // args: vector
+
+double* vctr_add(double*, double*, int); // args: vector, vector, number of dimensions
+double* vctr_sub(double*, double*, int); // args: vector, vector, number of dimensions
+
+double* vctr_multiply_scalar(double*, int, double); // args: vector, number of dimensions, scalar
+double vctr_dotp(double*, double*, int); // args: vector, vector, number of dimensions
+double* vctr_crossp(double*, double*, int); // args: vector, vector, number of dimensions
+
+double vctr_size(double*, int); // args: vector, number of dimensions
+//TODO: ADD THIS TO REFs : https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-vectors/a/vector-magnitude-normalization
+double vctr_normalize(double*, int); // args: vector, number of dimensions
+
 #endif
