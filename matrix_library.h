@@ -18,4 +18,6 @@ int** mtrx_multiply_scalar(int**, int, int, int); // args: matrix, width, height
 
 int** mtrx_transpose(int**, int, int); // args: matrix, width, height
 
+int mtrx_determinant(int**, int); // args: matrix, width&height
+
 #endif

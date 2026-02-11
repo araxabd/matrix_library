@@ -125,3 +125,37 @@ int** mtrx_transpose(int** matrix, int w, int h)
 	}
 	return answer;
 }
+
+int mtrx_determinant(int** matrix, int n)
+{
+	if(n == 1)
+		return matrix[0][0];
+
+	if(n == 2)
+		return matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0];
+
+	int answer = 0;
+	int** smaller = mtrx_create(n-1, n-1);
+	int sign = 1;
+	int si, sj;
+	for(int e=0;e < n;e++)
+	{
+		si = 0;
+		for(int i=1;i<n;i++)
+		{
+			sj = 0;
+			for(int j=0;j<n;j++)
+			{
+				if(j == e)
+					continue;
+				smaller[si][sj] = matrix[i][j];
+				sj++;
+			}
+			si++;
+		}
+		answer += sign * matrix[0][e] * mtrx_determinant(smaller, n-1);
+		sign *= -1;
+	}
+	mtrx_free(smaller, n-1);
+	return answer;
+}

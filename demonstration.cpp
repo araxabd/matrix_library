@@ -8,6 +8,7 @@ void add(void);
 void sub(void);
 void multiply_scalar(void);
 void transpose(void);
+void det(void);
 
 
 int main()
@@ -37,6 +38,9 @@ int main()
 				break;
 			case 't':
 				transpose();
+				break;
+			case 'd':
+				det();
 				break;
 			case 'e':
 				exit_flag = true;
@@ -177,4 +181,19 @@ void transpose()
 	mtrx_free(answer, w);
 	return;
 
+}
+
+void det()
+{
+	int n = 0;
+	cout << "Enter the width and the height of the matrix : ";
+	cin >> n;
+	int** matrix = mtrx_create(n, n);
+	cout << "---Enter the matrix values---" << endl;
+	mtrx_input(matrix, n, n);
+	
+	int answer = mtrx_determinant(matrix, n);
+	cout << "The answer is  : " << answer << endl;
+	mtrx_free(matrix, n);
+	return;
 }
