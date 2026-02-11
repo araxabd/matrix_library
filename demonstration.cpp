@@ -115,6 +115,8 @@ void multiply()
 
 void add()
 {
+	O << "<header>Matrix Addition</header>";
+	O << "<section>";
 	int w = 0;
 	int h = 0;
 	cout << "Enter the number of rows : ";
@@ -128,22 +130,31 @@ void add()
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(second, w, h);
 
+	add_matrix_to_html(first, w, h);
+	O << "<span>+</span>";
+	add_matrix_to_html(second, w, h);
 	double** answer = mtrx_add(first, second, w, h);
 	mtrx_free(first, h);
 	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);
+	O << "<span>=</span>";
+	add_matrix_to_html(answer, w, h);
 	mtrx_free(answer, h);
+	O << "</section>";
 	return;
 }
 
 void sub()
 {
+	O << "<header>Matrix Subtraction</header>";
+	O << "<section>";
 	int w = 0;
 	int h = 0;
 	cout << "Enter the number of rows : ";
 	cin >> h;
 	cout << "Enter the number of columns : ";
 	cin >> w;
+
 	double** first = mtrx_create(w,h);
 	double** second = mtrx_create(w,h);
 	cout << "---Enter first matrix values---" << endl;
@@ -151,16 +162,24 @@ void sub()
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(second, w, h);
 
+	add_matrix_to_html(first, w, h);
+	O << "<span>-</span>";
+	add_matrix_to_html(second, w, h);
+	O << "<span>=</span>";
 	double** answer = mtrx_sub(first, second, w, h);
 	mtrx_free(first, h);
 	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);
+	add_matrix_to_html(answer, w, h);
 	mtrx_free(answer, h);
+	O << "</section>";
 	return;
 }
 
 void multiply_scalar()
 {
+	O << "<header>Matrix Multiplication With Scalar</header>";
+	O << "<section>";
 	int w = 0;
 	int h = 0;
 	double number = 1.0;
@@ -170,20 +189,26 @@ void multiply_scalar()
 	cin >> w;
 	cout << "Enter the number you want to multiply the matrix with : ";
 	cin >> number;
+	O << "<span>" << number << " * </span>";
 	double** matrix = mtrx_create(w, h);
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, w, h);
 
-
+	add_matrix_to_html(matrix, w, h);
 	double** answer = mtrx_multiply_scalar(matrix, w, h, number);
 	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, w, h);
+	O << "<span>=</span>";
+	add_matrix_to_html(answer, w, h);
 	mtrx_free(answer, h);
+	O << "</section>";
 	return;
 }
 
 void transpose()
 {
+	O << "<header>Matrix Transpose</header>";
+	O << "<section>";
 	int w = 0;
 	int h = 0;
 	cout << "Enter the number of rows : ";
@@ -193,16 +218,23 @@ void transpose()
 	double** matrix = mtrx_create(w, h);
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, w, h);
+	O << "<span>The transose of </span>";
+	add_matrix_to_html(matrix, w, h);
 	double** answer = mtrx_transpose(matrix, w, h);
 	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, h, w);
+	O << "<span> is </span>";
+	add_matrix_to_html(answer, h, w);
 	mtrx_free(answer, w);
+	O << "</section>";
 	return;
 
 }
 
 void det()
 {
+	O << "<header>Determinant</header>";
+	O << "<section>";
 	int n = 0;
 	cout << "Enter the width and the height of the matrix : ";
 	cin >> n;
@@ -210,14 +242,31 @@ void det()
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, n, n);
 	
+	O << "<table style=\"border-top: 0;border-bottom: 0;\">";
+	for(int i=0;i < n;i++)
+	{
+		O << "<tr>";
+		for(int j=0;j<n;j++)
+		{
+			O << "<td>" << matrix[i][j] << "</td>";
+		}
+		O << "</tr>";
+	}
+	O << "</table>";
+
 	double answer = mtrx_determinant(matrix, n);
 	cout << "The answer is  : " << answer << endl;
+	O << "<span> = " << answer << "</span>";
 	mtrx_free(matrix, n);
+	O << "</section>";
 	return;
 }
 
 void inverse()
 {
+	O << "<header>Matrix Inverse</header>";
+	O << "<section>";
+
 	int n = 0;
 	cout << "Enter the width and height of the matrix : ";
 	cin >> n;
@@ -225,10 +274,16 @@ void inverse()
 	cout << "--Enter the matrix values---" << endl;
 	mtrx_input(matrix, n, n);
 
+	O << "<span>A = </span>";
+	add_matrix_to_html(matrix, n, n);
+	O << "<span>, A<sup>-1</sup> = </span>";
+
 	double** answer = mtrx_inverse(matrix, n);
 	mtrx_free(matrix, n);
 	mtrx_txt_display(answer, n, n);
+	add_matrix_to_html(answer, n, n);
 	mtrx_free(answer, n);
+	O << "</section>";
 	return;
 }
 
