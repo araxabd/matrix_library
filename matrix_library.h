@@ -20,4 +20,7 @@ int** mtrx_transpose(int**, int, int); // args: matrix, width, height
 
 int mtrx_determinant(int**, int); // args: matrix, width&height
 
+int** mtrx_cofactor(int**, int); // args: matrix, width&height
+int** mtrx_inverse(int**, int); // args: matrix, width&height
+
 #endif

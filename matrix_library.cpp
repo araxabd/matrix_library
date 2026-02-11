@@ -159,3 +159,48 @@ int mtrx_determinant(int** matrix, int n)
 	mtrx_free(smaller, n-1);
 	return answer;
 }
+
+int** mtrx_cofactor(int** matrix, int n)
+{
+	int** answer = mtrx_create(n, n);
+	int** smaller = mtrx_create(n-1, n-1);
+	int si, sj;
+	for(int r=0;r<n;r++)
+	{
+		for(int c=0;c<n;c++)
+		{
+			si = 0;
+			for(int i = 0;i < n;i++)
+			{
+				if(i == r)
+					continue;
+				sj = 0;
+				for(int j=0; j < n;j++)
+				{
+					if(j == c)
+						continue;
+					smaller[si][sj] = matrix[i][j];
+					sj++;
+				}
+				si++;
+			}
+			answer[r][c] = mtrx_determinant(smaller, n-1);
+		}
+	}
+	mtrx_free(smaller, n-1);
+	return answer;
+}
+
+int** mtrx_inverse(int** matrix, int n)
+{
+	// using gauss - jordan method
+	int det = mtrx_determinant(matrix, n);
+	if(det == 0) {
+		cout << "MATRIX IS NOT INVERTIBLE!" << endl;
+		return NULL;
+	}
+	//TODO: change everything to double (because i can't calculate inverse correctly with integers)
+
+
+}
+
