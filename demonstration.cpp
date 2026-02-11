@@ -6,6 +6,7 @@ using namespace std;
 void multiply(void);
 void add(void);
 void sub(void);
+void multiply_scalar(void);
 
 
 int main()
@@ -23,6 +24,9 @@ int main()
 				break;
 			case 'm':
 				multiply();
+				break;
+			case 'x':
+				multiply_scalar();
 				break;
 			case 'a':
 				add();
@@ -121,6 +125,29 @@ void sub()
 	int** answer = mtrx_sub(first, second, w, h);
 	mtrx_free(first, h);
 	mtrx_free(second, h);
+	mtrx_txt_display(answer, w, h);
+	mtrx_free(answer, h);
+	return;
+}
+
+void multiply_scalar()
+{
+	int w = 0;
+	int h = 0;
+	int number = 1;
+	cout << "Enter the number of rows : ";
+	cin >> h;
+	cout << "Enter the number of columns : ";
+	cin >> w;
+	cout << "Enter the number you want to multiply the matrix with : ";
+	cin >> number;
+	int** matrix = mtrx_create(w, h);
+	cout << "---Enter the matrix values---" << endl;
+	mtrx_input(matrix, w, h);
+
+
+	int** answer = mtrx_multiply_scalar(matrix, w, h, number);
+	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, w, h);
 	mtrx_free(answer, h);
 	return;

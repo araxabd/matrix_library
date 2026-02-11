@@ -99,3 +99,16 @@ int** mtrx_multiply(int** first, int fw, int fh, int** second, int sw, int sh)
 	return answer;
 	
 }
+
+int** mtrx_multiply_scalar(int** matrix, int w, int h, int number)
+{
+	int** answer = mtrx_create(w, h);
+	for(int i=0;i<h;i++)
+	{
+		for(int j=0;j<w;j++)
+		{
+			answer[i][j] = matrix[i][j] * number;
+		}
+	}
+	return answer;
+}
