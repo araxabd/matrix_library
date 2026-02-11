@@ -5,6 +5,7 @@ using namespace std;
 
 void multiply(void);
 void add(void);
+void sub(void);
 
 
 int main()
@@ -25,6 +26,9 @@ int main()
 				break;
 			case 'a':
 				add();
+				break;
+			case 's':
+				sub();
 				break;
 			case 'e':
 				exit_flag = true;
@@ -92,6 +96,29 @@ void add()
 	mtrx_input(second, w, h);
 
 	int** answer = mtrx_add(first, second, w, h);
+	mtrx_free(first, h);
+	mtrx_free(second, h);
+	mtrx_txt_display(answer, w, h);
+	mtrx_free(answer, h);
+	return;
+}
+
+void sub()
+{
+	int w = 0;
+	int h = 0;
+	cout << "Enter the number of rows : ";
+	cin >> h;
+	cout << "Enter the number of columns : ";
+	cin >> w;
+	int **first = mtrx_create(w,h);
+	int **second = mtrx_create(w,h);
+	cout << "---Enter first matrix values---" << endl;
+	mtrx_input(first, w, h);
+	cout << "---Enter second matrix values---" << endl;
+	mtrx_input(second, w, h);
+
+	int** answer = mtrx_sub(first, second, w, h);
 	mtrx_free(first, h);
 	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);

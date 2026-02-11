@@ -11,6 +11,7 @@ void mtrx_txt_display(int**, int, int); // args: matrix, width, height
 void mtrx_input(int**, int, int); // args: matrix, width, height
 
 int** mtrx_add(int**, int**, int, int); // args: matrix, matrix, width, height
+int** mtrx_sub(int**, int**, int, int); // args: matrix, matrix, width, height
 
 int** mtrx_multiply(int**, int, int, int**, int, int); // args: matrix, width, height, matrix, width, height
 #endif

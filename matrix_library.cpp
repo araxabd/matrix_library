@@ -66,6 +66,19 @@ int** mtrx_add(int** first, int** second, int w, int h)
 	return answer;
 }
 
+int** mtrx_sub(int** first, int** second, int w, int h)
+{
+	int** answer = mtrx_create(w, h);
+	for(int i=0;i<h;i++)
+	{
+		for(int j=0;j<w;j++)
+		{
+			answer[i][j] = first[i][j] - second[i][j];
+		}
+	}
+	return answer;
+}
+
 int** mtrx_multiply(int** first, int fw, int fh, int** second, int sw, int sh)
 {
 	if(fw != sh) {
