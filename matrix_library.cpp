@@ -1,5 +1,6 @@
 #include "matrix_library.h"
 #include <stdlib.h>
+#include <math.h>
 #include <iostream>
 
 using namespace std;
@@ -165,6 +166,7 @@ double** mtrx_cofactor(double** matrix, int n)
 	double** answer = mtrx_create(n, n);
 	double** smaller = mtrx_create(n-1, n-1);
 	int si, sj;
+	char sign;
 	for(int r=0;r<n;r++)
 	{
 		for(int c=0;c<n;c++)
@@ -184,7 +186,8 @@ double** mtrx_cofactor(double** matrix, int n)
 				}
 				si++;
 			}
-			answer[r][c] = mtrx_determinant(smaller, n-1);
+			sign = (((r+c)%2) == 0) ? 1 : -1;
+			answer[r][c] = sign * mtrx_determinant(smaller, n-1);
 		}
 	}
 	mtrx_free(smaller, n-1);
@@ -195,12 +198,20 @@ double** mtrx_inverse(double** matrix, int n)
 {
 	// using gauss - jordan method
 	double det = mtrx_determinant(matrix, n);
-	if(det == 0) {
+	if(fabs(det) < 10e-12) {
 		cout << "MATRIX IS NOT INVERTIBLE!" << endl;
 		return NULL;
 	}
-	//TODO: change everything to double (because i can't calculate inverse correctly with integers)
-
-
+	double** cofactor = mtrx_cofactor(matrix, n);
+	double** answer = mtrx_transpose(cofactor,n,n);//adjoint
+	mtrx_free(cofactor, n);
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			answer[i][j] = answer[i][j] / det;
+		}
+	}
+	return answer;
 }
 

@@ -9,6 +9,7 @@ void sub(void);
 void multiply_scalar(void);
 void transpose(void);
 void det(void);
+void inverse(void);
 
 
 int main()
@@ -41,6 +42,9 @@ int main()
 				break;
 			case 'd':
 				det();
+				break;
+			case 'i':
+				inverse();
 				break;
 			case 'e':
 				exit_flag = true;
@@ -195,5 +199,21 @@ void det()
 	double answer = mtrx_determinant(matrix, n);
 	cout << "The answer is  : " << answer << endl;
 	mtrx_free(matrix, n);
+	return;
+}
+
+void inverse()
+{
+	int n = 0;
+	cout << "Enter the width and height of the matrix : ";
+	cin >> n;
+	double** matrix = mtrx_create(n, n);
+	cout << "--Enter the matrix values---" << endl;
+	mtrx_input(matrix, n, n);
+
+	double** answer = mtrx_inverse(matrix, n);
+	mtrx_free(matrix, n);
+	mtrx_txt_display(answer, n, n);
+	mtrx_free(answer, n);
 	return;
 }
