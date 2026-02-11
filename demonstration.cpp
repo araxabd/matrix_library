@@ -241,14 +241,14 @@ void transpose()
 		return;
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, w, h);
-	O << "<span>The transose of </span>";
+	O << "<span>A = </span>";
 	add_matrix_to_html(matrix, w, h);
 	double** answer = mtrx_transpose(matrix, w, h);
 	if(answer == NULL)
 		return;
 	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, h, w);
-	O << "<span> is </span>";
+	O << "<span>, A<sup>T</sup> = </span>";
 	add_matrix_to_html(answer, h, w);
 	mtrx_free(answer, w);
 	O << "</section>";
