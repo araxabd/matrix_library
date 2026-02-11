@@ -24,6 +24,14 @@ int** mtrx_create(int w, int h)
 	return matrix;
 }
 
+void mtrx_free(int** matrix, int h)
+{
+	for(int i=0;i < h;i++)
+		free(matrix[i]);
+	free(matrix);
+	return;
+}
+
 void mtrx_txt_display(int** matrix, int w, int h)
 {
 	for(int i=0;i<h;i++) {

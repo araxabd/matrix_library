@@ -69,7 +69,10 @@ void multiply()
 
 
 	int** answer = mtrx_multiply(first, fw, fh, second, sw, sh);
+	mtrx_free(first, fh);
+	mtrx_free(second, sh);
 	mtrx_txt_display(answer, sw, fh);
+	mtrx_free(answer, fh);
 	return;
 }
 
@@ -89,6 +92,9 @@ void add()
 	mtrx_input(second, w, h);
 
 	int** answer = mtrx_add(first, second, w, h);
+	mtrx_free(first, h);
+	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);
+	mtrx_free(answer, h);
 	return;
 }
