@@ -7,6 +7,7 @@ void multiply(void);
 void add(void);
 void sub(void);
 void multiply_scalar(void);
+void transpose(void);
 
 
 int main()
@@ -34,8 +35,14 @@ int main()
 			case 's':
 				sub();
 				break;
+			case 't':
+				transpose();
+				break;
 			case 'e':
 				exit_flag = true;
+				break;
+			default:
+				cout << "*** Please enter valid option ***" << endl;
 				break;
 		}
 		if(exit_flag)
@@ -151,4 +158,23 @@ void multiply_scalar()
 	mtrx_txt_display(answer, w, h);
 	mtrx_free(answer, h);
 	return;
+}
+
+void transpose()
+{
+	int w = 0;
+	int h = 0;
+	cout << "Enter the number of rows : ";
+	cin >> h;
+	cout << "Enter the number of heights : ";
+	cin >> w;
+	int** matrix = mtrx_create(w, h);
+	cout << "---Enter the matrix values---" << endl;
+	mtrx_input(matrix, w, h);
+	int** answer = mtrx_transpose(matrix, w, h);
+	mtrx_free(matrix, h);
+	mtrx_txt_display(answer, h, w);
+	mtrx_free(answer, w);
+	return;
+
 }

@@ -112,3 +112,16 @@ int** mtrx_multiply_scalar(int** matrix, int w, int h, int number)
 	}
 	return answer;
 }
+
+int** mtrx_transpose(int** matrix, int w, int h)
+{
+	int** answer = mtrx_create(h, w);
+	for(int i=0;i<h;i++)
+	{
+		for(int j=0;j<w;j++)
+		{
+			answer[j][i] = matrix[i][j];
+		}
+	}
+	return answer;
+}

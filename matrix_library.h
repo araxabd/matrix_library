@@ -15,4 +15,7 @@ int** mtrx_sub(int**, int**, int, int); // args: matrix, matrix, width, height
 
 int** mtrx_multiply(int**, int, int, int**, int, int); // args: matrix, width, height, matrix, width, height
 int** mtrx_multiply_scalar(int**, int, int, int); // args: matrix, width, height, scalar
+
+int** mtrx_transpose(int**, int, int); // args: matrix, width, height
+
 #endif
