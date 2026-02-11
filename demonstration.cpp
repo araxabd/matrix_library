@@ -7,6 +7,7 @@ using namespace std;
 ofstream O("./output.html");
 
 void init_html(void);
+void add_matrix_to_html(double**, int, int);
 void end_html(void);
 
 void multiply(void);
@@ -20,8 +21,8 @@ void inverse(void);
 
 int main()
 {
+	init_html();
 	while(1) {
-
 		char job;
 		cout << "What do you want to do (h for help) :";
 		cin >> job;
@@ -62,12 +63,16 @@ int main()
 		if(exit_flag)
 			break;
 	}
+	end_html();
 	return 0;
 }
 
 
 void multiply()
 {
+	O << "<header>Matrix Multiplication</header>";
+	O << "<section>";
+
 	int fw = 0;
 	int fh = 0;
 	cout << "Enter the number of rows : ";
@@ -93,14 +98,18 @@ void multiply()
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(second, sw, sh);
 
-
-
+	add_matrix_to_html(first, fw, fh);
+	O << "<span>*</span>";
+	add_matrix_to_html(second, sw, sh);
+	O << "<span>=</span>";
 
 	double** answer = mtrx_multiply(first, fw, fh, second, sw, sh);
 	mtrx_free(first, fh);
 	mtrx_free(second, sh);
 	mtrx_txt_display(answer, sw, fh);
+	add_matrix_to_html(answer, sw, fh);
 	mtrx_free(answer, fh);
+	O << "</section>";
 	return;
 }
 
@@ -233,6 +242,21 @@ void init_html()
 "td {padding: 1rem;}"
 "section { padding:1rem 0;margin: 0;display:flex;justify-content:center;align-items:center;border-bottom:2px solid white; }"
 "</style></head><body>\n";
+}
+
+void add_matrix_to_html(double** matrix, int w, int h)
+{
+	O << "<table>";
+	for(int i=0;i < h;i++)
+	{
+		O << "<tr>";
+		for(int j=0;j < w;j++)
+		{
+			O << "<td>" << matrix[i][j] << "</td>";
+		}
+		O << "</tr>";
+	}
+	O << "</table>";
 }
 
 void end_html()
