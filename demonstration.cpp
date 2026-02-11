@@ -1,7 +1,13 @@
 #include "matrix_library.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
+
+ofstream O("./output.html");
+
+void init_html(void);
+void end_html(void);
 
 void multiply(void);
 void add(void);
@@ -216,4 +222,22 @@ void inverse()
 	mtrx_txt_display(answer, n, n);
 	mtrx_free(answer, n);
 	return;
+}
+
+
+void init_html()
+{
+	O << "<!DOCTYPE html>"
+	"<html><head><title>Matrix</title><style>"
+"body { background-color:#0a0a0a;color:#b0b0b0;font-size:5rem; }"
+"table { border:2px solid white;background-color:#0d0d0d; }"
+"td {padding: 1rem;}"
+"section { padding:1rem 0;margin: 0;display:flex;justify-content:center;align-items:center;border-bottom:2px solid white; }"
+"</style></head><body>\n";
+}
+
+void end_html()
+{
+	O << "</body></html>\n";
+	O.close();
 }
