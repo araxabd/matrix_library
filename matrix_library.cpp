@@ -1,6 +1,6 @@
 #include "matrix_library.h"
-#include <stdlib.h>
-#include <math.h>
+#include <cstdlib>
+#include <cmath>
 #include <iostream>
 
 using namespace std;
