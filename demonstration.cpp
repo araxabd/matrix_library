@@ -61,7 +61,6 @@ int main()
 		}
 		if(exit_flag)
 			break;
-		// TODO: free matrices after allocation
 	}
 	return 0;
 }
