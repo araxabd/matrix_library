@@ -66,7 +66,7 @@ void multiply()
 	cout << "Enter the number of columns : ";
 	cin >> fw;
 
-	int** first = mtrx_create(fw, fh);
+	double** first = mtrx_create(fw, fh);
 
 	cout << "---Enter first matrix values---" << endl;
 	mtrx_input(first, fw, fh);
@@ -79,7 +79,7 @@ void multiply()
 	cout << "Enter the number of columns : ";
 	cin >> sw;
 
-	int** second = mtrx_create(sw, sh);
+	double** second = mtrx_create(sw, sh);
 
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(second, sw, sh);
@@ -87,7 +87,7 @@ void multiply()
 
 
 
-	int** answer = mtrx_multiply(first, fw, fh, second, sw, sh);
+	double** answer = mtrx_multiply(first, fw, fh, second, sw, sh);
 	mtrx_free(first, fh);
 	mtrx_free(second, sh);
 	mtrx_txt_display(answer, sw, fh);
@@ -103,14 +103,14 @@ void add()
 	cin >> h;
 	cout << "Enter the number of columns : ";
 	cin >> w;
-	int **first = mtrx_create(w,h);
-	int **second = mtrx_create(w,h);
+	double** first = mtrx_create(w,h);
+	double** second = mtrx_create(w,h);
 	cout << "---Enter first matrix values---" << endl;
 	mtrx_input(first, w, h);
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(second, w, h);
 
-	int** answer = mtrx_add(first, second, w, h);
+	double** answer = mtrx_add(first, second, w, h);
 	mtrx_free(first, h);
 	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);
@@ -126,14 +126,14 @@ void sub()
 	cin >> h;
 	cout << "Enter the number of columns : ";
 	cin >> w;
-	int **first = mtrx_create(w,h);
-	int **second = mtrx_create(w,h);
+	double** first = mtrx_create(w,h);
+	double** second = mtrx_create(w,h);
 	cout << "---Enter first matrix values---" << endl;
 	mtrx_input(first, w, h);
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(second, w, h);
 
-	int** answer = mtrx_sub(first, second, w, h);
+	double** answer = mtrx_sub(first, second, w, h);
 	mtrx_free(first, h);
 	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);
@@ -145,19 +145,19 @@ void multiply_scalar()
 {
 	int w = 0;
 	int h = 0;
-	int number = 1;
+	double number = 1.0;
 	cout << "Enter the number of rows : ";
 	cin >> h;
 	cout << "Enter the number of columns : ";
 	cin >> w;
 	cout << "Enter the number you want to multiply the matrix with : ";
 	cin >> number;
-	int** matrix = mtrx_create(w, h);
+	double** matrix = mtrx_create(w, h);
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, w, h);
 
 
-	int** answer = mtrx_multiply_scalar(matrix, w, h, number);
+	double** answer = mtrx_multiply_scalar(matrix, w, h, number);
 	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, w, h);
 	mtrx_free(answer, h);
@@ -172,10 +172,10 @@ void transpose()
 	cin >> h;
 	cout << "Enter the number of heights : ";
 	cin >> w;
-	int** matrix = mtrx_create(w, h);
+	double** matrix = mtrx_create(w, h);
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, w, h);
-	int** answer = mtrx_transpose(matrix, w, h);
+	double** answer = mtrx_transpose(matrix, w, h);
 	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, h, w);
 	mtrx_free(answer, w);
@@ -188,11 +188,11 @@ void det()
 	int n = 0;
 	cout << "Enter the width and the height of the matrix : ";
 	cin >> n;
-	int** matrix = mtrx_create(n, n);
+	double** matrix = mtrx_create(n, n);
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, n, n);
 	
-	int answer = mtrx_determinant(matrix, n);
+	double answer = mtrx_determinant(matrix, n);
 	cout << "The answer is  : " << answer << endl;
 	mtrx_free(matrix, n);
 	return;

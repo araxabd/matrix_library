@@ -4,9 +4,9 @@
 
 using namespace std;
 
-int** mtrx_create(int w, int h)
+double** mtrx_create(int w, int h)
 {
-	int** matrix = (int**)malloc(sizeof(int*)*h);
+	double** matrix = (double**)malloc(sizeof(double*)*h);
 	if(matrix == NULL)
 	{
 		cout << "Memory allocation error" << endl;
@@ -14,7 +14,7 @@ int** mtrx_create(int w, int h)
 	}
 	for(int i=0;i<h;i++)
 	{
-		matrix[i]  = (int*)malloc(sizeof(int)*w);
+		matrix[i]  = (double*)malloc(sizeof(double)*w);
 		if(matrix[i] == NULL)
 		{
 			cout << "Memory allocation error" << endl;
@@ -24,7 +24,7 @@ int** mtrx_create(int w, int h)
 	return matrix;
 }
 
-void mtrx_free(int** matrix, int h)
+void mtrx_free(double** matrix, int h)
 {
 	for(int i=0;i < h;i++)
 		free(matrix[i]);
@@ -32,7 +32,7 @@ void mtrx_free(int** matrix, int h)
 	return;
 }
 
-void mtrx_txt_display(int** matrix, int w, int h)
+void mtrx_txt_display(double** matrix, int w, int h)
 {
 	for(int i=0;i<h;i++) {
 		for(int j=0;j<w;j++)
@@ -41,7 +41,7 @@ void mtrx_txt_display(int** matrix, int w, int h)
 	}
 }
 
-void mtrx_input(int** matrix, int w, int h)
+void mtrx_input(double** matrix, int w, int h)
 {
 	for(int i=0;i < h;i++)
 	{
@@ -53,9 +53,9 @@ void mtrx_input(int** matrix, int w, int h)
 	}
 }
 
-int** mtrx_add(int** first, int** second, int w, int h)
+double** mtrx_add(double** first, double** second, int w, int h)
 {
-	int** answer = mtrx_create(w, h);
+	double** answer = mtrx_create(w, h);
 	for(int i=0;i<h;i++)
 	{
 		for(int j=0;j<w;j++)
@@ -66,9 +66,9 @@ int** mtrx_add(int** first, int** second, int w, int h)
 	return answer;
 }
 
-int** mtrx_sub(int** first, int** second, int w, int h)
+double** mtrx_sub(double** first, double** second, int w, int h)
 {
-	int** answer = mtrx_create(w, h);
+	double** answer = mtrx_create(w, h);
 	for(int i=0;i<h;i++)
 	{
 		for(int j=0;j<w;j++)
@@ -79,14 +79,14 @@ int** mtrx_sub(int** first, int** second, int w, int h)
 	return answer;
 }
 
-int** mtrx_multiply(int** first, int fw, int fh, int** second, int sw, int sh)
+double** mtrx_multiply(double** first, int fw, int fh, double** second, int sw, int sh)
 {
 	if(fw != sh) {
 		cout << "CAN NOT BE MULTIPLIED (BAD DIMENSIONS)" << endl;
 		return NULL;
 	}
-	int** answer = mtrx_create(sw, fh);
-	int acc = 0;
+	double** answer = mtrx_create(sw, fh);
+	double acc = 0;
 	for(int i=0;i < fh;i++) {
 		for(int j=0;j < sw;j++) {
 			for(int e=0;e < fw;e++) {
@@ -100,9 +100,9 @@ int** mtrx_multiply(int** first, int fw, int fh, int** second, int sw, int sh)
 	
 }
 
-int** mtrx_multiply_scalar(int** matrix, int w, int h, int number)
+double** mtrx_multiply_scalar(double** matrix, int w, int h, double number)
 {
-	int** answer = mtrx_create(w, h);
+	double** answer = mtrx_create(w, h);
 	for(int i=0;i<h;i++)
 	{
 		for(int j=0;j<w;j++)
@@ -113,9 +113,9 @@ int** mtrx_multiply_scalar(int** matrix, int w, int h, int number)
 	return answer;
 }
 
-int** mtrx_transpose(int** matrix, int w, int h)
+double** mtrx_transpose(double** matrix, int w, int h)
 {
-	int** answer = mtrx_create(h, w);
+	double** answer = mtrx_create(h, w);
 	for(int i=0;i<h;i++)
 	{
 		for(int j=0;j<w;j++)
@@ -126,7 +126,7 @@ int** mtrx_transpose(int** matrix, int w, int h)
 	return answer;
 }
 
-int mtrx_determinant(int** matrix, int n)
+double mtrx_determinant(double** matrix, int n)
 {
 	if(n == 1)
 		return matrix[0][0];
@@ -134,8 +134,8 @@ int mtrx_determinant(int** matrix, int n)
 	if(n == 2)
 		return matrix[0][0]*matrix[1][1] - matrix[0][1]*matrix[1][0];
 
-	int answer = 0;
-	int** smaller = mtrx_create(n-1, n-1);
+	double answer = 0.0;
+	double** smaller = mtrx_create(n-1, n-1);
 	int sign = 1;
 	int si, sj;
 	for(int e=0;e < n;e++)
@@ -160,10 +160,10 @@ int mtrx_determinant(int** matrix, int n)
 	return answer;
 }
 
-int** mtrx_cofactor(int** matrix, int n)
+double** mtrx_cofactor(double** matrix, int n)
 {
-	int** answer = mtrx_create(n, n);
-	int** smaller = mtrx_create(n-1, n-1);
+	double** answer = mtrx_create(n, n);
+	double** smaller = mtrx_create(n-1, n-1);
 	int si, sj;
 	for(int r=0;r<n;r++)
 	{
@@ -191,10 +191,10 @@ int** mtrx_cofactor(int** matrix, int n)
 	return answer;
 }
 
-int** mtrx_inverse(int** matrix, int n)
+double** mtrx_inverse(double** matrix, int n)
 {
 	// using gauss - jordan method
-	int det = mtrx_determinant(matrix, n);
+	double det = mtrx_determinant(matrix, n);
 	if(det == 0) {
 		cout << "MATRIX IS NOT INVERTIBLE!" << endl;
 		return NULL;
