@@ -326,7 +326,7 @@ void init_html()
 	O << "<!DOCTYPE html>"
 	"<html><head><title>Matrix</title><style>"
 "body { background-color:#0a0a0a;color:#b0b0b0;font-size:5rem; }"
-"table { border:2px solid white;background-color:#0d0d0d; }"
+"table { border:2px solid white;background-color:#0d0d0d;margin:1rem; }"
 "td {padding: 1rem;}"
 "section { padding:1rem 0;margin: 0;display:flex;justify-content:center;align-items:center;border-bottom:2px solid white; }"
 "</style></head><body>\n";
