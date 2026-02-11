@@ -82,9 +82,10 @@ void multiply()
 
 	double** first = mtrx_create(fw, fh);
 
+	if (first == NULL)
+		return;
 	cout << "---Enter first matrix values---" << endl;
 	mtrx_input(first, fw, fh);
-
 
 	int sw = 0;
 	int sh = 0;
@@ -95,6 +96,8 @@ void multiply()
 
 	double** second = mtrx_create(sw, sh);
 
+	if(second == NULL)
+		return;
 	cout << "---Enter second matrix values---" << endl;
 	mtrx_input(second, sw, sh);
 
@@ -104,6 +107,8 @@ void multiply()
 	O << "<span>=</span>";
 
 	double** answer = mtrx_multiply(first, fw, fh, second, sw, sh);
+	if (answer == NULL)
+		return;
 	mtrx_free(first, fh);
 	mtrx_free(second, sh);
 	mtrx_txt_display(answer, sw, fh);
@@ -124,7 +129,11 @@ void add()
 	cout << "Enter the number of columns : ";
 	cin >> w;
 	double** first = mtrx_create(w,h);
+	if(first == NULL)
+		return;
 	double** second = mtrx_create(w,h);
+	if(second == NULL)
+		return;
 	cout << "---Enter first matrix values---" << endl;
 	mtrx_input(first, w, h);
 	cout << "---Enter second matrix values---" << endl;
@@ -134,6 +143,8 @@ void add()
 	O << "<span>+</span>";
 	add_matrix_to_html(second, w, h);
 	double** answer = mtrx_add(first, second, w, h);
+	if(answer == NULL)
+		return;
 	mtrx_free(first, h);
 	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);
@@ -156,7 +167,11 @@ void sub()
 	cin >> w;
 
 	double** first = mtrx_create(w,h);
+	if(first == NULL)
+		return;
 	double** second = mtrx_create(w,h);
+	if(second == NULL)
+		return;
 	cout << "---Enter first matrix values---" << endl;
 	mtrx_input(first, w, h);
 	cout << "---Enter second matrix values---" << endl;
@@ -167,6 +182,8 @@ void sub()
 	add_matrix_to_html(second, w, h);
 	O << "<span>=</span>";
 	double** answer = mtrx_sub(first, second, w, h);
+	if(answer == NULL)
+		return;
 	mtrx_free(first, h);
 	mtrx_free(second, h);
 	mtrx_txt_display(answer, w, h);
@@ -191,11 +208,15 @@ void multiply_scalar()
 	cin >> number;
 	O << "<span>" << number << " * </span>";
 	double** matrix = mtrx_create(w, h);
+	if(matrix == NULL)
+		return;
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, w, h);
 
 	add_matrix_to_html(matrix, w, h);
 	double** answer = mtrx_multiply_scalar(matrix, w, h, number);
+	if (answer == NULL)
+		return;
 	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, w, h);
 	O << "<span>=</span>";
@@ -216,11 +237,15 @@ void transpose()
 	cout << "Enter the number of heights : ";
 	cin >> w;
 	double** matrix = mtrx_create(w, h);
+	if(matrix == NULL)
+		return;
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, w, h);
 	O << "<span>The transose of </span>";
 	add_matrix_to_html(matrix, w, h);
 	double** answer = mtrx_transpose(matrix, w, h);
+	if(answer == NULL)
+		return;
 	mtrx_free(matrix, h);
 	mtrx_txt_display(answer, h, w);
 	O << "<span> is </span>";
@@ -239,6 +264,8 @@ void det()
 	cout << "Enter the width and the height of the matrix : ";
 	cin >> n;
 	double** matrix = mtrx_create(n, n);
+	if(matrix == NULL)
+		return;
 	cout << "---Enter the matrix values---" << endl;
 	mtrx_input(matrix, n, n);
 	
@@ -255,6 +282,8 @@ void det()
 	O << "</table>";
 
 	double answer = mtrx_determinant(matrix, n);
+	if(answer == NULL)
+		return;
 	cout << "The answer is  : " << answer << endl;
 	O << "<span> = " << answer << "</span>";
 	mtrx_free(matrix, n);
@@ -271,6 +300,8 @@ void inverse()
 	cout << "Enter the width and height of the matrix : ";
 	cin >> n;
 	double** matrix = mtrx_create(n, n);
+	if(matrix == NULL)
+		return;
 	cout << "--Enter the matrix values---" << endl;
 	mtrx_input(matrix, n, n);
 
@@ -279,6 +310,8 @@ void inverse()
 	O << "<span>, A<sup>-1</sup> = </span>";
 
 	double** answer = mtrx_inverse(matrix, n);
+	if(answer == NULL)
+		return;
 	mtrx_free(matrix, n);
 	mtrx_txt_display(answer, n, n);
 	add_matrix_to_html(answer, n, n);
