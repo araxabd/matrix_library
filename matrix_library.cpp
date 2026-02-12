@@ -230,6 +230,15 @@ void vctr_free(double* vector)
 	free(vector);
 }
 
+void vctr_input(double* vector, int n)
+{
+	for (int i=0;i<n;i++) {
+		cout << "Enter the component " << i << " : ";
+		cin >> vector[i];
+	}
+	return;
+}
+
 double* vctr_add(double* first, double* second, int n)
 {
 	double* answer = vctr_create(n);
@@ -292,10 +301,33 @@ double* vctr_crossp(double* first, double* second, int n)
 		answer[i] = sign * mtrx_determinant(matrix, 2);
 		sign *= -1;
 	}
+
+
+	// Hard code approach
+//	answer[0] = first[1]*second[2] - first[2]*second[1];
+//	answer[1] = first[2]*second[0] - first[0]*second[2];
+//	answer[2] = first[0]*second[1] - first[1]*second[0];
 	return answer;
 }
 
 double vctr_size(double* vector, int n)
 {
-	//TODO
+	double answer = 0;
+	for(int i=0; i < n;i++)
+	{
+		answer += vector[i] * vector[i];
+	}
+	answer = sqrt(answer);
+	return answer;
+}
+
+double* vctr_normalize(double* vector, int n)
+{
+	double* answer = vctr_create(n);
+	double size = vctr_size(vector, n);
+	for(int i=0; i<n; i++)
+	{
+		answer[i] = vector[i] / size;
+	}
+	return answer;
 }

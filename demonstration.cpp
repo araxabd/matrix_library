@@ -18,6 +18,14 @@ void transpose(void);
 void det(void);
 void inverse(void);
 
+void vector_add(void);
+void vector_sub(void);
+void vector_multiply_scalar(void);
+void vector_dotp(void);
+void vector_crossp(void);
+void vector_size(void);
+void vector_normalize(void);
+
 
 int main()
 {
@@ -30,7 +38,7 @@ int main()
 		bool exit_flag = false;
 		switch(job) {
 			case 'h':
-				cout << "e for exit\na for add matrices\ns for subtract matrices\nm for multiply matrices\nh for showing this help\nx for scalar times matrix\nt for matrix transpose\nd for matrix determinant\ni for matrix inverse\n" << endl;
+				cout << "e for exit\na for add matrices\ns for subtract matrices\nm for multiply matrices\nh for showing this help\nx for scalar times matrix\nt for matrix transpose\nd for matrix determinant\ni for matrix inverse\nv for vectors\n" << endl;
 				break;
 			case 'm':
 				multiply();
@@ -55,6 +63,37 @@ int main()
 				break;
 			case 'e':
 				exit_flag = true;
+				break;
+			case 'v':
+				char op;
+				cout << "What operation ([a]dd, [s]ubtract, [m]ultiply with scalar, [d]ot, [c]ross, ma[g]nitude, [n]ormalize) ? ";
+				cin >> op;
+				switch(op) {
+					case 'a':
+						vector_add();
+						break;
+					case 's':
+						vector_sub();
+						break;
+					case 'm':
+						vector_multiply_scalar();
+						break;
+					case 'd':
+						vector_dotp();
+						break;
+					case 'c':
+						vector_crossp();
+						break;
+					case 'g':
+						vector_size();
+						break;
+					case 'n':
+						vector_normalize();
+						break;
+					default:
+						cout << "NO VALID OPERATION" << endl;
+						break;
+				}
 				break;
 			default:
 				cout << "*** Please enter valid option ***" << endl;
@@ -282,8 +321,6 @@ void det()
 	O << "</table>";
 
 	double answer = mtrx_determinant(matrix, n);
-	if(answer == NULL)
-		return;
 	cout << "The answer is  : " << answer << endl;
 	O << "<span> = " << answer << "</span>";
 	mtrx_free(matrix, n);
@@ -347,8 +384,227 @@ void add_matrix_to_html(double** matrix, int w, int h)
 	O << "</table>";
 }
 
+void add_vector_to_html(double* vector, int n)
+{
+	O << "<table>";
+	for(int i=0; i<n; i++)
+	{
+		O << "<tr><td>" << vector[i] << "</td></tr>";
+	}
+	O << "</table>";
+	return;
+}
+
 void end_html()
 {
 	O << "</body></html>\n";
 	O.close();
 }
+
+
+void vector_add()
+{
+	O << "<header>Vector Addition</header>";
+	O << "<section>";
+	int n = 0;
+	cout << "Enter the number of dimensions : ";
+	cin >> n;
+	double* first = vctr_create(n);
+	double* second = vctr_create(n);
+	if(first == NULL || second == NULL)
+		return;
+	cout << "---Enter the first vector values---" << endl;
+	vctr_input(first, n);
+	cout << "---Enter the second vector values---" << endl;
+	vctr_input(second, n);
+	
+	add_vector_to_html(first, n);
+	O << "<span>+</span>";
+	add_vector_to_html(second, n);
+	O << "<span>=</span>";
+
+	double* answer = vctr_add(first, second, n);
+	if(answer == NULL)
+		return;
+	add_vector_to_html(answer, n);
+	cout << "DONE!" << endl;
+
+	vctr_free(first);
+	vctr_free(second);
+	vctr_free(answer);
+	O << "</section>";
+	return;
+}
+
+void vector_sub() 
+{
+	O << "<header>Vector Subtraction</header>";
+	O << "<section>";
+	int n = 0;
+	cout << "Enter the number of dimensions : ";
+	cin >> n;
+	double* first = vctr_create(n);
+	double* second = vctr_create(n);
+	if(first == NULL || second == NULL)
+		return;
+	cout << "---Enter the first vector values---" << endl;
+	vctr_input(first, n);
+	cout << "---Enter the second vector values---" << endl;
+	vctr_input(second, n);
+	
+	add_vector_to_html(first, n);
+	O << "<span>-</span>";
+	add_vector_to_html(second, n);
+	O << "<span>=</span>";
+
+	double* answer = vctr_sub(first, second, n);
+	if(answer == NULL)
+		return;
+	add_vector_to_html(answer, n);
+	cout << "DONE!" << endl;
+	vctr_free(answer);
+	vctr_free(first);
+	vctr_free(second);
+
+	O << "</section>";
+	return;
+
+}
+void vector_multiply_scalar()
+{
+	O << "<header>Vector Multiplication With Scalar</header>";
+	O << "<section>";
+	int n = 0;
+	double number = 1;
+	cout << "Enter the number of dimensions : ";
+	cin >> n;
+	cout << "Enter the scalar : ";
+	cin >> number;
+	double* vector = vctr_create(n);
+	if(vector == NULL)
+		return;
+	cout << "---Enter the vector values---" << endl;
+	vctr_input(vector, n);
+	O << "<span>" << number << " * </span>";
+	add_vector_to_html(vector, n);
+	O << "<span>=</span>";
+	double* answer = vctr_multiply_scalar(vector, n, number);
+	if(answer == NULL)
+		return;
+	add_vector_to_html(answer, n);
+	vctr_free(answer);
+	vctr_free(vector);
+	O << "</section>";
+	return;
+
+}
+void vector_dotp()
+{
+	O << "<header>Vector Dot Product</header>";
+	
+	O << "<section>";
+	int n = 0;
+	cout << "Enter the number of dimensions : ";
+	cin >> n;
+	double* first = vctr_create(n);
+	double* second = vctr_create(n);
+	if(first == NULL || second == NULL)
+		return;
+	cout << "---Enter the first vector values---" << endl;
+	vctr_input(first, n);
+	cout << "---Enter the second vector values---" << endl;
+	vctr_input(second, n);
+
+	add_vector_to_html(first, n);
+	O << "<span> . </span>";
+	add_vector_to_html(second, n);
+	O << "<span> = </span>";
+
+
+	double answer = vctr_dotp(first, second, n);
+	O << "<span>" << answer << "</span>";
+	vctr_free(first);
+	vctr_free(second);
+	O << "</section>";
+	return;
+}
+void vector_crossp()
+{
+	O << "<header>Vector Cross Product</header>";
+	O << "<section>";
+
+	int n = 0;
+	cout << "Enter the number of dimensions : ";
+	cin >> n;
+	double* first = vctr_create(n);
+	double* second = vctr_create(n);
+	if(first == NULL || second == NULL)
+		return;
+	cout << "---Enter the first vector values---" << endl;
+	vctr_input(first,n);
+	cout << "---Enter the second vector values---" << endl;
+	vctr_input(second, n);
+
+	add_vector_to_html(first, n);
+	O << "<span>x</span>";
+	add_vector_to_html(second, n);
+	O << "<span>=</span>";
+
+	double* answer = vctr_crossp(first, second, n);
+	if(answer == NULL)
+		return;
+	add_vector_to_html(answer, n);
+	vctr_free(first);
+	vctr_free(second);
+	vctr_free(answer);
+	O << "</section>";
+	return;
+}
+
+void vector_size()
+{
+	O << "<header>Vector Magnitude</header>";
+	O << "<section>";
+	int n = 0;
+	cout << "Enter the number of dimensions : ";
+	cin >> n;
+	double* vector = vctr_create(n);
+	if(vector == NULL)
+		return;
+	cout << "---Enter the vector values---" << endl;
+	vctr_input(vector, n);
+	O << "<span>mag(</span>";
+	add_vector_to_html(vector, n);
+	O << "<span>) = </span>";
+	double answer = vctr_size(vector, n);
+	O << "<span>" << answer << "</span>";
+	vctr_free(vector);
+	O << "</section>";
+	return;
+}
+
+void vector_normalize()
+{
+	O << "<header>Vector Normalize</header>";
+	O << "<section>";
+	int n = 0;
+	cout << "Enter the number of dimensions : ";
+	cin >> n;
+	double* vector = vctr_create(n);
+	if(vector == NULL)
+		return;
+	cout << "---Enter the vector values---" << endl;
+	vctr_input(vector, n);
+	double* answer = vctr_normalize(vector, n);
+	add_vector_to_html(answer, n);
+	O << "<span>is the normalized of</span>";
+	add_vector_to_html(vector, n);
+
+	vctr_free(vector);
+	vctr_free(answer);
+
+	O << "</section>";
+	return;
+}
+
+
