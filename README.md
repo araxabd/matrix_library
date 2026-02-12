@@ -11,6 +11,7 @@ The demonstration file is just an example of using this library and it uses HTML
 It has an interactive command-line interface to choose and do the operation you want.
 
 ## TODO
+- [ ] zero for ver small numbers in matrices
 - [ ] show broken operations in html file better
 - [ ] better error handling for demonstration and memory allocation failures.
 - [ ] better style for HTML output
