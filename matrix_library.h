@@ -40,7 +40,7 @@ double vctr_dotp(double*, double*, int); // args: vector, vector, number of dime
 double* vctr_crossp(double*, double*, int); // args: vector, vector, number of dimensions
 
 double vctr_size(double*, int); // args: vector, number of dimensions
-//TODO: ADD THIS TO REFs : https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-vectors/a/vector-magnitude-normalization
+
 double* vctr_normalize(double*, int); // args: vector, number of dimensions
 
 #endif
