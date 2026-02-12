@@ -93,7 +93,11 @@ double** mtrx_multiply(double** first, int fw, int fh, double** second, int sw, 
 			for(int e=0;e < fw;e++) {
 				acc += first[i][e]*second[e][j];
 			}
-			answer[i][j] = acc;
+			if(acc < 10e-10) {
+				answer[i][j] = 0;
+			} else {
+				answer[i][j] = acc;
+			}
 			acc = 0;
 		}
 	}
