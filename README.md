@@ -16,6 +16,7 @@ It has an interactive command-line interface to choose and do the operation you 
 - [ ] better error handling for demonstration and memory allocation failures.
 - [ ] better style for HTML output
 - [ ] better design for the file structure and use structs for matrix and vector
+- [ ] better terminal output for matrices and a text output for vector operations
 
 ## Refrences
 - [KhanAcademy (for vector normalization)](https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-vectors/a/vector-magnitude-normalization)
